@@ -1,0 +1,28 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "typography",
+  "type": "registry:component",
+  "title": "Typography",
+  "description": "A simple typography component",
+  "dependencies": [
+    "class-variance-authority"
+  ],
+  "registryDependencies": [
+    "@mi/libs",
+    "@mi/types"
+  ],
+  "files": [
+    {
+      "path": "registry/mi/components/atoms/Typography/Typography.component.tsx",
+      "content": "import { cn } from \"@/libs/utils.lib\";\r\nimport { Box, BoxRF } from \"@/types/component.type\";\r\nimport { cva, VariantProps } from \"class-variance-authority\";\r\nimport React, { forwardRef } from \"react\";\r\n\r\nexport const typograhpyVariants = cva(\"font-satoshi\", {\r\n  defaultVariants: {\r\n    variant: \"body-md\",\r\n    weight: \"regular\",\r\n  },\r\n  variants: {\r\n    variant: {\r\n      inherit: \"\",\r\n      h1: \"text-h4 leading-h4 md:text-h2 md:leading-h4 lg:text-h1 lg:leading-h1\",\r\n      h2: \"text-h5 leading-h5 md:text-h3 md:leading-h3 lg:text-h2 lg:leading-h2\",\r\n      h3: \"text-h6 leading-h6 md:text-h4 md:leading-h4 lg:text-h3 lg:leading-h3\",\r\n      h4: \"text-h6 leading-h6 md:text-h5 md:leading-h5 lg:text-h4 lg:leading-h4\",\r\n      h5: \"text-xl leading-xl md:text-h6 md:leading-h6 lg:text-h5 lg:leading-h5\",\r\n      h6: \"text-lg leading-lg md:text-xl md:leading-xl lg:text-h6 lg:leading-h6\",\r\n      \"body-lg\": \"text-lg leading-lg\",\r\n      \"body-md\": \"text-md leading-md\",\r\n      \"body-sm\": \"text-sm leading-sm\",\r\n      \"body-xl\": \"text-xl leading-xl\",\r\n      \"body-xs\": \"text-xs leading-xs\",\r\n    },\r\n    weight: {\r\n      bold: \"font-bold\",\r\n      medium: \"font-medium\",\r\n      regular: \"font-normal\",\r\n      semibold: \"font-semibold\",\r\n    },\r\n  },\r\n});\r\n\r\nexport interface TypograhpyProps\r\n  extends\r\n    React.ButtonHTMLAttributes<HTMLButtonElement>,\r\n    VariantProps<typeof typograhpyVariants> {}\r\n\r\nconst PrimitiveTypograhpy = forwardRef<Element, BoxRF<TypograhpyProps>>(\r\n  (props, ref) => {\r\n    const {\r\n      as: Element = \"p\",\r\n      children,\r\n      className,\r\n      variant,\r\n      weight,\r\n      ...restProps\r\n    } = props;\r\n\r\n    return (\r\n      <Element\r\n        className={cn(typograhpyVariants({ className, variant, weight }))}\r\n        ref={ref}\r\n        {...restProps}>\r\n        {children}\r\n      </Element>\r\n    );\r\n  },\r\n);\r\nPrimitiveTypograhpy.displayName = \"Typograhpy\";\r\n\r\nconst Typograhpy: Box<TypograhpyProps> = PrimitiveTypograhpy;\r\n\r\nexport default Typograhpy;\r\n",
+      "type": "registry:component",
+      "target": "components/atoms/Typography/Typography.component.tsx"
+    },
+    {
+      "path": "registry/mi/components/atoms/Typography/index.ts",
+      "content": "export {\r\n  default,\r\n  type TypograhpyProps,\r\n  typograhpyVariants,\r\n} from \"./Typography.component\";\r\n",
+      "type": "registry:component",
+      "target": "components/atoms/Typography/index.ts"
+    }
+  ]
+}

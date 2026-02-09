@@ -1,0 +1,33 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "libs",
+  "type": "registry:component",
+  "title": "Libs",
+  "description": "A libs",
+  "dependencies": [
+    "clsx",
+    "google-libphonenumber",
+    "date-fns",
+    "tailwind-merge"
+  ],
+  "files": [
+    {
+      "path": "registry/mi/libs/utils.lib.ts",
+      "content": "import { clsx, type ClassValue } from \"clsx\";\r\nimport { format } from \"date-fns\";\r\nimport { numberFormatRules } from \"./regex.lib\";\r\nimport { twMerge } from \"./twMerge.lib\";\r\n\r\nexport function cn(...inputs: ClassValue[]) {\r\n  return twMerge(clsx(inputs));\r\n}\r\n\r\nexport const recordToArray = <T>(record: Record<string, T>) =>\r\n  Object.entries(record).map(([value, label]) => ({ label, value }));\r\n\r\nexport const arrayToRecord = <T>(array: Array<T>, key: keyof T) =>\r\n  array.reduce(\r\n    (acc, item) => {\r\n      const recordKey = item[key];\r\n      if (typeof recordKey === \"string\" || typeof recordKey === \"number\") {\r\n        acc[recordKey as string] = item;\r\n      }\r\n      return acc;\r\n    },\r\n    {} as Record<string, T>,\r\n  );\r\n\r\nexport const extractNumbers = (input?: string) => {\r\n  return input?.replace(/\\D/g, \"\"); // Removes all non-digits\r\n};\r\n\r\nexport const getFilenameFromUrl = (url?: string) => {\r\n  return url?.split(\"/\").pop();\r\n};\r\n\r\nexport const formatDateForPayload = (date?: string) =>\r\n  date ? format(date, \"yyyy-MM-dd\") : \"\";\r\n\r\nexport const numberFormat = (value: string) => {\r\n  return value.replace(/[^0-9]/g, \"\").replace(numberFormatRules, \".\");\r\n};\r\n\r\nexport const numberFormatReverse = (value: string) => {\r\n  return parseFloat(value.replace(/\\./g, \"\") ?? \"0\");\r\n};\r\n\r\nexport const ifEmpty = <T>(value: T, defaultValue: T) => {\r\n  if (\r\n    value === undefined ||\r\n    value === null ||\r\n    value === false ||\r\n    (typeof value === \"string\" && value.trim() === \"\")\r\n  ) {\r\n    return defaultValue;\r\n  }\r\n  return value;\r\n};\r\n",
+      "type": "registry:component",
+      "target": "libs/utils.lib.ts"
+    },
+    {
+      "path": "registry/mi/libs/twMerge.lib.ts",
+      "content": "import { extendTailwindMerge } from \"tailwind-merge\";\r\n\r\nexport const twMerge = extendTailwindMerge({\r\n  extend: {\r\n    classGroups: {\r\n      flex: [\"flex-1\", \"flex-0\"],\r\n      \"font-size\": [\r\n        \"text-h1\",\r\n        \"text-h2\",\r\n        \"text-h3\",\r\n        \"text-h4\",\r\n        \"text-h5\",\r\n        \"text-h6\",\r\n        \"text-lg\",\r\n        \"text-md\",\r\n        \"text-sm\",\r\n        \"text-xl\",\r\n        \"text-xs\",\r\n      ],\r\n      \"shadow-color\": [\"text-shadow-*\"],\r\n    },\r\n  },\r\n});\r\n",
+      "type": "registry:component",
+      "target": "libs/twMerge.lib.ts"
+    },
+    {
+      "path": "registry/mi/libs/regex.lib.ts",
+      "content": "import { PhoneNumberUtil } from \"google-libphonenumber\";\r\n\r\nexport const passwordRules =\r\n  /^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*/\\\\'`;=+\\-_~(),.?\":{}|<>])[^\\s]{8,}$/;\r\n\r\nexport const emailRules =\r\n  /^(([^<>()[\\]\\\\.,;:\\s@\"]+(\\.[^<>()[\\]\\\\.,;:\\s@\"]+)*)|(\".+\"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}])|(([a-zA-Z0-9\\\\-]+\\.)+[a-zA-Z]{2,}))$/;\r\n\r\nexport const phoneNumberRules =\r\n  /^\\s*(?:\\+?(\\d{1,3}))?[-. (]*(\\d{3})[-. )]*(\\d{3})[-. ]*(\\d{5})(?: *x(\\d+))?\\s*$/;\r\n\r\nexport const numberRules = /^-?\\d+(\\.\\d+)?$/;\r\n\r\nexport const numberFormatRules = /\\B(?=(\\d{3})+(?!\\d))/g;\r\n\r\nexport const websiteRules =\r\n  /^(https?:\\/\\/)?(www\\.)?[a-zA-Z0-9-]+(\\.[a-zA-Z]{2,})\\/?.*$/;\r\nexport const linkedinRules =\r\n  /^(https?:\\/\\/)?([a-zA-Z0-9-]+\\.)?linkedin\\.com\\/[a-zA-Z0-9@:%._\\+~#=\\/-]+\\/?$/;\r\nexport const igRules =\r\n  /^(https?:\\/\\/)?(www\\.)?instagram\\.com\\/[a-zA-Z0-9@:%._\\+~#=\\/-]+\\/?$/;\r\nexport const xRules =\r\n  /^(https?:\\/\\/)?(www\\.)?x\\.com\\/[a-zA-Z0-9@:%._\\+~#=\\/-]+\\/?$/;\r\nexport const fbRules =\r\n  /^(https?:\\/\\/)?(www\\.)?facebook\\.com\\/[a-zA-Z0-9@:%._\\+~#=\\/-]+\\/?$/;\r\n\r\nexport const chamberOfCommerceRules =\r\n  /\\b(HRA|HRB)\\s?\\d{1,6}\\b|\\b(ATU)\\s?\\d{1,9}\\b|\\b(CHE)\\s?\\d{1,9}\\b$/;\r\n\r\nexport const emptyWyswyg = /^(<p><\\/p>\\n|<p>&nbsp;<\\/p>\\n)$/;\r\n\r\nexport const acceptPdf = \"application/pdf\";\r\nexport const acceptImage = \"image/png, image/jpeg, image/webp\";\r\n\r\nconst phoneUtil = PhoneNumberUtil.getInstance();\r\nexport const phoneNumberValidate = (phone: string) => {\r\n  try {\r\n    return phoneUtil.isValidNumber(phoneUtil.parseAndKeepRawInput(phone));\r\n  } catch {\r\n    return false;\r\n  }\r\n};\r\n",
+      "type": "registry:component",
+      "target": "libs/regex.lib.ts"
+    }
+  ]
+}

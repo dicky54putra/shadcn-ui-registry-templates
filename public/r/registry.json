@@ -4,75 +4,111 @@
   "homepage": "https://acme.com",
   "items": [
     {
-      "name": "hello-world",
+      "name": "mi-style",
+      "type": "registry:theme",
+      "title": "MI Style",
+      "description": "A MI simple style",
+      "css": {
+        "@layer base": {
+          "h1": {
+            "font-size": "var(--text-2xl)"
+          },
+          "h2": {
+            "font-size": "var(--text-xl)"
+          }
+        }
+      }
+    },
+    {
+      "name": "libs",
       "type": "registry:component",
-      "title": "Hello World",
-      "description": "A simple hello world component",
-      "registryDependencies": ["button"],
+      "title": "Libs",
+      "description": "A libs",
+      "dependencies": [
+        "clsx",
+        "google-libphonenumber",
+        "date-fns",
+        "tailwind-merge"
+      ],
       "files": [
         {
-          "path": "registry/new-york/blocks/hello-world/hello-world.tsx",
-          "type": "registry:component"
+          "path": "registry/mi/libs/utils.lib.ts",
+          "type": "registry:component",
+          "target": "libs/utils.lib.ts"
+        },
+        {
+          "path": "registry/mi/libs/twMerge.lib.ts",
+          "type": "registry:component",
+          "target": "libs/twMerge.lib.ts"
+        },
+        {
+          "path": "registry/mi/libs/regex.lib.ts",
+          "type": "registry:component",
+          "target": "libs/regex.lib.ts"
         }
       ]
     },
     {
-      "name": "example-form",
+      "name": "types",
       "type": "registry:component",
-      "title": "Example Form",
-      "description": "A contact form with Zod validation.",
-      "dependencies": ["zod"],
-      "registryDependencies": ["button", "input", "label", "textarea", "card"],
+      "title": "Types",
+      "description": "A type",
+      "dependencies": [
+        "clsx",
+        "google-libphonenumber",
+        "date-fns",
+        "tailwind-merge"
+      ],
       "files": [
         {
-          "path": "registry/new-york/blocks/example-form/example-form.tsx",
-          "type": "registry:component"
+          "path": "registry/mi/types/component.type.ts",
+          "type": "registry:component",
+          "target": "types/component.type.ts"
+        },
+        {
+          "path": "registry/mi/types/utils.type.ts",
+          "type": "registry:component",
+          "target": "types/utils.type.ts"
         }
       ]
     },
     {
-      "name": "complex-component",
+      "name": "button",
       "type": "registry:component",
-      "title": "Complex Component",
-      "description": "A complex component showing hooks, libs and components.",
-      "registryDependencies": ["card"],
+      "title": "Button",
+      "description": "A simple button component",
+      "dependencies": ["class-variance-authority"],
+      "registryDependencies": ["@mi/libs", "@mi/types"],
       "files": [
         {
-          "path": "registry/new-york/blocks/complex-component/page.tsx",
-          "type": "registry:page",
-          "target": "app/pokemon/page.tsx"
+          "path": "registry/mi/components/atoms/Button/Button.component.tsx",
+          "type": "registry:component",
+          "target": "components/atoms/Button/Button.component.tsx"
         },
         {
-          "path": "registry/new-york/blocks/complex-component/components/pokemon-card.tsx",
-          "type": "registry:component"
-        },
-        {
-          "path": "registry/new-york/blocks/complex-component/components/pokemon-image.tsx",
-          "type": "registry:component"
-        },
-        {
-          "path": "registry/new-york/blocks/complex-component/lib/pokemon.ts",
-          "type": "registry:lib"
-        },
-        {
-          "path": "registry/new-york/blocks/complex-component/hooks/use-pokemon.ts",
-          "type": "registry:hook"
+          "path": "registry/mi/components/atoms/Button/index.ts",
+          "type": "registry:component",
+          "target": "components/atoms/Button/index.ts"
         }
       ]
     },
     {
-      "name": "example-with-css",
+      "name": "typography",
       "type": "registry:component",
-      "title": "Example with CSS",
-      "description": "A login form with a CSS file.",
+      "title": "Typography",
+      "description": "A simple typography component",
+      "dependencies": ["class-variance-authority"],
+      "registryDependencies": ["@mi/libs", "@mi/types"],
       "files": [
         {
-          "path": "registry/new-york/blocks/example-with-css/example-card.tsx",
-          "type": "registry:component"
+          "path": "registry/mi/components/atoms/Typography/Typography.component.tsx",
+          "type": "registry:component",
+          "target": "components/atoms/Typography/Typography.component.tsx"
         },
         {
-          "path": "registry/new-york/blocks/example-with-css/example-card.css",
-          "type": "registry:component"
+          "path": "registry/mi/components/atoms/Typography/index.ts",
+          "type": "registry:component",
+          "target": "components/atoms/Typography/index.ts"
         }
       ]
     }

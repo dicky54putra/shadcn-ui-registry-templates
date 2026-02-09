@@ -1,0 +1,27 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "types",
+  "type": "registry:component",
+  "title": "Types",
+  "description": "A type",
+  "dependencies": [
+    "clsx",
+    "google-libphonenumber",
+    "date-fns",
+    "tailwind-merge"
+  ],
+  "files": [
+    {
+      "path": "registry/mi/types/component.type.ts",
+      "content": "import React from \"react\";\r\n\r\nexport interface BoxOwnProps<E extends React.ElementType = React.ElementType> {\r\n  as?: E;\r\n}\r\n\r\nexport type BoxProps<E extends React.ElementType> = BoxOwnProps<E> &\r\n  Omit<React.ComponentProps<E>, keyof BoxOwnProps>;\r\n\r\nexport type Box<DefaultProps> = <E extends React.ElementType = \"div\">(\r\n  props: BoxProps<E> & DefaultProps,\r\n) => React.ReactElement | React.ReactNode | null;\r\n\r\nexport type BoxRF<T> = BoxOwnProps & T;\r\n",
+      "type": "registry:component",
+      "target": "types/component.type.ts"
+    },
+    {
+      "path": "registry/mi/types/utils.type.ts",
+      "content": "export interface Option {\r\n  label: string;\r\n  value: string;\r\n}\r\n\r\nexport interface IModal {\r\n  close?: () => void;\r\n  isOpen?: boolean;\r\n  open?: () => void;\r\n}\r\n\r\nexport type Classnames<T extends string> = Partial<Record<T, string>>;\r\n\r\nexport interface ResponseData<T> {\r\n  data: T;\r\n}\r\n",
+      "type": "registry:component",
+      "target": "types/utils.type.ts"
+    }
+  ]
+}

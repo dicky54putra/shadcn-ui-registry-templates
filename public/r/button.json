@@ -1,0 +1,28 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "button",
+  "type": "registry:component",
+  "title": "Button",
+  "description": "A simple button component",
+  "dependencies": [
+    "class-variance-authority"
+  ],
+  "registryDependencies": [
+    "@mi/libs",
+    "@mi/types"
+  ],
+  "files": [
+    {
+      "path": "registry/mi/components/atoms/Button/Button.component.tsx",
+      "content": "import { cn } from \"@/registry/mi/libs/utils.lib\";\r\nimport { Box, BoxRF } from \"@/registry/mi/types/component.type\";\r\nimport { cva, type VariantProps } from \"class-variance-authority\";\r\n\r\nimport React, { forwardRef, ReactNode } from \"react\";\r\n\r\nconst buttonVariants = cva(\r\n  \"inline-flex justify-center items-center gap-2 border border-solid rounded-full focus-visible:outline-none focus-visible:ring-2 font-satoshi whitespace-nowrap transition-colors disabled:pointer-events-none\",\r\n  {\r\n    defaultVariants: {\r\n      font: \"sm\",\r\n      size: \"md\",\r\n      variant: \"primary\",\r\n    },\r\n    variants: {\r\n      font: {\r\n        md: \"text-md leading-md font-medium\",\r\n        sm: \"text-sm leading-sm font-medium\",\r\n      },\r\n      size: {\r\n        \"icon-lg\": \"p-3\",\r\n        \"icon-md\": \"p-2.5\",\r\n        \"icon-sm\": \"p-2\",\r\n        \"icon-xl\": \"p-3\",\r\n        \"icon-xxs\": \"p-1\",\r\n        lg: \"px-4 py-2.5\",\r\n        link: \"p-0\",\r\n        md: \"px-4 py-2.5\",\r\n        sm: \"px-3.5 py-2\",\r\n        unset: \"\",\r\n        xl: \"px-4 py-3\",\r\n      },\r\n      variant: {\r\n        \"black-glass\":\r\n          \"bg-base-black/50 backdrop-blur-lg border-base-white/20 text-base-white\",\r\n        danger:\r\n          \"bg-error-danger-500 border-error-danger-500 text-base-white hover:bg-error-danger-600 hover:border-error-danger-600 ring-error-danger-100\",\r\n        \"link-color\":\r\n          \"border-transparent bg-transparent text-primary-500 hover:text-primary-700\",\r\n        \"link-gray\":\r\n          \"border-transparent bg-transparent text-gray-600 hover:text-gray-800\",\r\n        \"outline-color\":\r\n          \"bg-transparent border-primary-500 hover:bg-primary-50 text-primary-500 ring-neutral-100\",\r\n        \"outline-danger\":\r\n          \"bg-transparent  border-error-danger-500 hover:bg-error-danger-50 text-error-danger-500 ring-neutral-100  disabled:text-error-danger-300 disabled:border-error-danger-200\",\r\n        \"outline-gray\":\r\n          \"bg-transparent  border-gray-300 hover:bg-primary-50 text-gray-800 ring-neutral-100  disabled:text-gray-300 disabled:border-gray-200\",\r\n        primary:\r\n          \"bg-primary-500 border-primary-500 text-base-white hover:bg-primary-600 hover:border-primary-600 ring-primary-100 disabled:bg-gray-200 disabled:text-gray-400 disabled:border-gray-200\",\r\n        secondary:\r\n          \"bg-primary-50 border-primary-50 text-primary-500 hover:bg-primary-100 hover:border-primary-100 ring-primary-100\",\r\n        \"secondary-danger\":\r\n          \"bg-error-danger-50 border-error-danger-50 text-error-danger-500 hover:bg-error-danger-100 hover:border-error-danger-100 ring-error-danger-100\",\r\n        \"secondary-secondary\":\r\n          \"bg-secondary-50 border-secondary-50 text-secondary-600 hover:bg-secondary-100 hover:border-secondary-100 ring-secondary-100\",\r\n        \"secondary-tertiary\":\r\n          \"bg-warning-50 border-warning-50 text-warning-600 hover:bg-warning-100 hover:border-warning-100 ring-warning-100\",\r\n        tertiary:\r\n          \"bg-warning-500 border-warning-500 text-base-white hover:bg-warning-600 hover:border-warning-600 ring-warning-100\",\r\n        white:\r\n          \"bg-base-white border-base-white text-gray-800 hover:bg-gray-300 hover:border-gray-bg-gray-300 ring-gray-100 disabled:opacity-50\",\r\n      },\r\n    },\r\n  },\r\n);\r\n\r\nexport interface ButtonProps\r\n  extends\r\n    React.ButtonHTMLAttributes<HTMLButtonElement>,\r\n    VariantProps<typeof buttonVariants> {\r\n  endIcon?: ReactNode;\r\n  startIcon?: ReactNode;\r\n}\r\n\r\nconst PrimitiveButton = forwardRef<Element, BoxRF<ButtonProps>>(\r\n  (props, ref) => {\r\n    const {\r\n      as: Element = \"button\",\r\n      children,\r\n      className,\r\n      endIcon,\r\n      font,\r\n      size,\r\n      startIcon,\r\n      variant,\r\n      ...restProps\r\n    } = props;\r\n\r\n    return (\r\n      <Element\r\n        className={cn(buttonVariants({ className, font, size, variant }))}\r\n        ref={ref}\r\n        name=\"Button\"\r\n        aria-label={restProps.name ?? \"Button\"}\r\n        title={restProps.name ?? \"Button\"}\r\n        {...restProps}>\r\n        {startIcon}\r\n        {children}\r\n        {endIcon}\r\n      </Element>\r\n    );\r\n  },\r\n);\r\nPrimitiveButton.displayName = \"Button\";\r\n\r\n/** Primary UI component for user interaction */\r\nconst Button: Box<ButtonProps> = PrimitiveButton;\r\n\r\nexport { Button, buttonVariants };\r\n\r\nexport default Button;\r\n",
+      "type": "registry:component",
+      "target": "components/atoms/Button/Button.component.tsx"
+    },
+    {
+      "path": "registry/mi/components/atoms/Button/index.ts",
+      "content": "export {\r\n  default,\r\n  Button,\r\n  type ButtonProps,\r\n  buttonVariants,\r\n} from \"./Button.component\";\r\n",
+      "type": "registry:component",
+      "target": "components/atoms/Button/index.ts"
+    }
+  ]
+}
